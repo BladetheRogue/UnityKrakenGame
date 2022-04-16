@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
+    // BOOL FLAGS
+    [SerializeField] Image blackSquare;
+
     // BOOL FLAGS
     bool fightFlag = true;
     bool bagFlag = false;
     bool pokeFlag = false;
     bool runFlag = false;
     bool menuFlag = false;
-
 
     // MENU INSERTS
     [SerializeField] GameObject fightMenu;
@@ -46,18 +49,22 @@ public class PlayerControls : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.C) && fightFlag == true)
             {
+
                 fightMenu.SetActive(true);
                 click.Play();
                 menuFlag = true;
             }
             if (Input.GetKeyDown(KeyCode.C) && bagFlag == true)
             {
+                StartCoroutine(FadeImage(true));
                 bagMenu.SetActive(true);
                 click.Play();
                 menuFlag = true;
+
             }
             if (Input.GetKeyDown(KeyCode.C) && pokeFlag == true)
             {
+                StartCoroutine(FadeImage(true));
                 pokeMenu.SetActive(true);
                 click.Play();
                 menuFlag = true;
@@ -65,10 +72,15 @@ public class PlayerControls : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X) && menuFlag == true)
         {
+            if (!fightFlag)
+            {
+                StartCoroutine(FadeImage(true));
+            }
             fightMenu.SetActive(false);
             bagMenu.SetActive(false);
             pokeMenu.SetActive(false);
             menuFlag = false;
+
         }
 
         // FIGHT ARROW KEYS
@@ -151,6 +163,26 @@ public class PlayerControls : MonoBehaviour
     {
         runFlag = onOff;
         runButton.SetActive(onOff);
+    }
+
+    IEnumerator FadeImage(bool fadeAway)
+    {
+        if (fadeAway)
+        {
+            for (float i = 1; i >= 0; i -= Time.deltaTime)
+            {
+                blackSquare.color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+        }
+        else
+        {
+            for (float i = 1; i <= 1; i += Time.deltaTime)
+            {
+                blackSquare.color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+        }
     }
 
 }
