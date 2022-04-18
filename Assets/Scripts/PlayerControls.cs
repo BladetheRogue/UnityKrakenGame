@@ -29,12 +29,6 @@ public class PlayerControls : MonoBehaviour
     // SOUND INSERT
     [SerializeField] AudioSource click;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -49,7 +43,6 @@ public class PlayerControls : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.C) && fightFlag == true)
             {
-
                 fightMenu.SetActive(true);
                 click.Play();
                 menuFlag = true;
@@ -80,7 +73,6 @@ public class PlayerControls : MonoBehaviour
             bagMenu.SetActive(false);
             pokeMenu.SetActive(false);
             menuFlag = false;
-
         }
 
         // FIGHT ARROW KEYS
@@ -90,13 +82,11 @@ public class PlayerControls : MonoBehaviour
             {
                 FightShift(false);
                 PokeShift(true);
-                click.Play();
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) && fightFlag == true)
             {
                 FightShift(false);
                 BagShift(true);
-                click.Play();
             }
 
             // BAG ARROW KEYS
@@ -104,13 +94,11 @@ public class PlayerControls : MonoBehaviour
             {
                 BagShift(false);
                 RunShift(true);
-                click.Play();
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow) && bagFlag == true)
             {
                 BagShift(false);
                 FightShift(true);
-                click.Play();
             }
 
             // POKE ARROW KEYS
@@ -118,13 +106,11 @@ public class PlayerControls : MonoBehaviour
             {
                 PokeShift(false);
                 FightShift(true);
-                click.Play();
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) && pokeFlag == true)
             {
                 PokeShift(false);
                 RunShift(true);
-                click.Play();
             }
 
             // RUN ARROW KEYS
@@ -132,13 +118,11 @@ public class PlayerControls : MonoBehaviour
             {
                 RunShift(false);
                 BagShift(true);
-                click.Play();
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow) && runFlag == true)
             {
                 RunShift(false);
                 PokeShift(true);
-                click.Play();
             }
         }
         
@@ -148,21 +132,37 @@ public class PlayerControls : MonoBehaviour
     {
         fightFlag = onOff;
         fightButton.SetActive(onOff);
+        if (onOff)
+        {
+            click.Play();
+        }
     }
     void BagShift(bool onOff)
     {
         bagFlag = onOff;
         bagButton.SetActive(onOff);
+        if (onOff)
+        {
+            click.Play();
+        }
     }
     void PokeShift(bool onOff)
     {
         pokeFlag = onOff;
         pokeButton.SetActive(onOff);
+        if (onOff)
+        {
+            click.Play();
+        }
     }
     void RunShift(bool onOff)
     {
         runFlag = onOff;
         runButton.SetActive(onOff);
+        if (onOff)
+        {
+            click.Play();
+        }
     }
 
     IEnumerator FadeImage(bool fadeAway)
